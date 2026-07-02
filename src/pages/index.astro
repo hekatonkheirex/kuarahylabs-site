@@ -6,11 +6,21 @@ const email = "kuarahylabs@gmail.com";
 
 <Layout
   title="Kuarahy Labs — Solo app studio"
-  description="Kuarahy Labs is a solo app studio building small, well-crafted apps. Currently shipping PawRecord, a pet health logbook."
+  description="Kuarahy Labs builds focused, privacy-first apps for everyday life — no clutter, no noise, just tools that work. Currently shipping PawRecord, a pet health logbook."
+  titleEs="Kuarahy Labs — Estudio de apps en solitario"
+  descriptionEs="Kuarahy Labs crea apps enfocadas y respetuosas con tu privacidad para el día a día: sin relleno, sin ruido, solo herramientas que funcionan. Por ahora, PawRecord: una libreta de salud para tu mascota."
 >
   <header class="hero">
     <div class="container hero-inner">
-      <img src="/logo.png" alt="Kuarahy Labs logo" class="hero-logo" width="88" height="88" />
+      <img
+        src="/logo.png"
+        alt="Kuarahy Labs logo"
+        data-en-label="Kuarahy Labs logo"
+        data-es-label="Logotipo de Kuarahy Labs"
+        class="hero-logo"
+        width="88"
+        height="88"
+      />
       <p class="brand-mark">Kuarahy Labs</p>
       <h1>
         <span data-lang="en">Small studio. Sun-bright software.</span>
@@ -22,8 +32,8 @@ const email = "kuarahylabs@gmail.com";
           clutter, no noise — just tools that work.</span
         >
         <span data-lang="es"
-          >Creando apps enfocadas que priorizan tu privacidad, para el día
-          a día. Sin relleno, sin ruido: solo herramientas que
+          >Creando apps enfocadas y respetuosas con tu privacidad para el
+          día a día. Sin relleno, sin ruido: solo herramientas que
           funcionan.</span
         >
       </p>
@@ -32,15 +42,14 @@ const email = "kuarahylabs@gmail.com";
   </header>
 
   <section id="apps" class="container">
-    <p class="eyebrow">
-      <span data-lang="en">Apps</span>
-      <span data-lang="es">Apps</span>
-    </p>
+    <p class="eyebrow">Apps</p>
     <h2>PawRecord</h2>
     <div class="app-card card">
       <img
         src="/pawrecord-icon.svg"
         alt="PawRecord app icon"
+        data-en-label="PawRecord app icon"
+        data-es-label="Ícono de la app PawRecord"
         class="app-icon"
         width="72"
         height="72"
@@ -68,6 +77,7 @@ const email = "kuarahylabs@gmail.com";
           class="button"
           href="#"
           aria-disabled="true"
+          tabindex="-1"
           data-en-label="PawRecord on Google Play — coming soon"
           data-es-label="PawRecord en Google Play, próximamente"
           aria-label="PawRecord on Google Play — coming soon"
@@ -96,10 +106,10 @@ const email = "kuarahylabs@gmail.com";
         made with care rather than committee.</span
       >
       <span data-lang="es"
-        >Kuarahy Labs es un estudio de una sola persona: un solo desarrollador
-        que diseña, construye y publica cada app de principio a fin. El
-        nombre viene de "kuarahy", la palabra guaraní para sol: software
-        chico, cálido y útil, hecho con cariño y no en comité.</span
+        >Kuarahy Labs es un estudio de una sola persona que diseña,
+        construye y publica cada app de principio a fin. El nombre viene de
+        "kuarahy", la palabra guaraní para sol: software chico, cálido y
+        útil, hecho con cariño y no en comité.</span
       >
     </p>
   </section>

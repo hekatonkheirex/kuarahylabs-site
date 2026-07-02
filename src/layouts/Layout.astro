@@ -4,13 +4,21 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description: string;
+  titleEs: string;
+  descriptionEs: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, titleEs, descriptionEs } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html
+  lang="en"
+  data-en-title={title}
+  data-es-title={titleEs}
+  data-en-description={description}
+  data-es-description={descriptionEs}
+>
   <head>
     <script is:inline>
       (function () {
@@ -38,7 +46,7 @@ const { title, description } = Astro.props;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="/logo.png" />
-    <meta name="theme-color" content="#e6912e" />
+    <meta name="theme-color" content="#fffaf2" />
   </head>
   <body>
     <header class="site-controls" aria-label="Site preferences">
@@ -55,11 +63,16 @@ const { title, description } = Astro.props;
       const root = document.documentElement;
       const themeBtn = document.getElementById("theme-toggle")!;
       const langBtns = document.querySelectorAll<HTMLButtonElement>("[data-lang-btn]");
+      const themeColorMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')!;
 
       function syncTheme() {
         const isDark = root.getAttribute("data-theme") === "dark";
         themeBtn.textContent = isDark ? "☀️" : "🌙";
         themeBtn.setAttribute("aria-pressed", String(isDark));
+        themeColorMeta.setAttribute(
+          "content",
+          getComputedStyle(root).getPropertyValue("--color-bg").trim()
+        );
       }
 
       function syncLang() {
@@ -71,8 +84,14 @@ const { title, description } = Astro.props;
         });
         document.querySelectorAll<HTMLElement>("[data-en-label]").forEach((el) => {
           const label = lang === "es" ? el.dataset.esLabel : el.dataset.enLabel;
-          if (label) el.setAttribute("aria-label", label);
+          if (!label) return;
+          if (el.tagName === "IMG") el.setAttribute("alt", label);
+          else el.setAttribute("aria-label", label);
         });
+        document.title = (lang === "es" ? root.dataset.esTitle : root.dataset.enTitle) ?? document.title;
+        const descMeta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+        const desc = lang === "es" ? root.dataset.esDescription : root.dataset.enDescription;
+        if (descMeta && desc) descMeta.setAttribute("content", desc);
       }
 
       themeBtn.addEventListener("click", () => {

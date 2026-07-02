@@ -136,6 +136,10 @@ h3 {
   background: var(--color-surface);
 }
 
+[data-theme="dark"] .button:hover {
+  color: #241a10;
+}
+
 [data-lang] {
   display: none;
 }
