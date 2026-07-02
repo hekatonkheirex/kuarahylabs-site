@@ -41,14 +41,16 @@ const { title, description } = Astro.props;
     <meta name="theme-color" content="#e6912e" />
   </head>
   <body>
-    <div class="site-controls" role="group" aria-label="Site preferences">
+    <header class="site-controls" aria-label="Site preferences">
       <div class="lang-toggle" role="group" aria-label="Language">
         <button type="button" data-lang-btn="en">EN</button>
         <button type="button" data-lang-btn="es">ES</button>
       </div>
       <button type="button" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-    </div>
-    <slot />
+    </header>
+    <main>
+      <slot />
+    </main>
     <script>
       const root = document.documentElement;
       const themeBtn = document.getElementById("theme-toggle")!;
