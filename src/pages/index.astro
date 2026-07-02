@@ -1,0 +1,163 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const email = "kuarahylabs@gmail.com";
+---
+
+<Layout
+  title="Kuarahy Labs — Solo app studio"
+  description="Kuarahy Labs is a solo app studio building small, well-crafted apps. Currently shipping PawRecord, a pet health logbook."
+>
+  <header class="hero">
+    <div class="container hero-inner">
+      <img src="/logo.png" alt="Kuarahy Labs logo" class="hero-logo" width="88" height="88" />
+      <p class="eyebrow">Kuarahy Labs</p>
+      <h1>Small studio. Sun-bright software.</h1>
+      <p class="hero-tagline">
+        A solo app studio building focused, well-made apps — one problem at a
+        time.
+      </p>
+    </div>
+    <div class="sunburst" aria-hidden="true"></div>
+  </header>
+
+  <section id="apps" class="container">
+    <p class="eyebrow">Apps</p>
+    <h2>PawRecord</h2>
+    <div class="app-card card">
+      <img
+        src="/pawrecord-icon.svg"
+        alt="PawRecord app icon"
+        class="app-icon"
+        width="72"
+        height="72"
+      />
+      <div>
+        <h3>Your pet's health, in one place</h3>
+        <p>
+          PawRecord is a simple logbook for your pet's health — vet visits,
+          vaccinations, medications, and weight, tracked in one place so
+          nothing gets lost between appointments. Available for iOS and
+          Android.
+        </p>
+        <a
+          class="button"
+          href="#"
+          aria-disabled="true"
+          aria-label="PawRecord on Google Play — coming soon"
+        >
+          Coming soon to Google Play
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="container">
+    <p class="eyebrow">About</p>
+    <h2>Built by one person, end to end</h2>
+    <p class="about-copy">
+      Kuarahy Labs is a solo app studio — one developer designing, building,
+      and shipping every app from scratch. The name comes from "kuarahy," the
+      Guaraní word for sun: small, warm, useful software, made with care
+      rather than committee.
+    </p>
+  </section>
+
+  <section id="contact" class="container">
+    <p class="eyebrow">Contact</p>
+    <h2>Get in touch</h2>
+    <p>
+      <a href={`mailto:${email}`}>{email}</a>
+    </p>
+  </section>
+
+  <footer class="container">
+    <p>&copy; {new Date().getFullYear()} Kuarahy Labs.</p>
+  </footer>
+
+  <style>
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding-block: clamp(4rem, 12vw, 8rem) clamp(3rem, 8vw, 6rem);
+      text-align: center;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-logo {
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      margin: 0.25rem 0 0.5rem;
+    }
+
+    .hero-tagline {
+      max-width: 32rem;
+      color: var(--color-text-muted);
+      font-size: 1.125rem;
+    }
+
+    .sunburst {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 140vw;
+      aspect-ratio: 1;
+      transform: translate(-50%, -55%);
+      background: conic-gradient(
+        from 0deg,
+        var(--amber-light) 0deg 8deg,
+        transparent 8deg 20deg
+      );
+      opacity: 0.35;
+      z-index: 0;
+      mask-image: radial-gradient(circle, black 0%, transparent 60%);
+    }
+
+    .app-card {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      margin-top: 1.5rem;
+    }
+
+    .app-icon {
+      border-radius: 18px;
+      flex-shrink: 0;
+    }
+
+    .app-card h3 {
+      margin-top: 0;
+    }
+
+    .about-copy {
+      max-width: 40rem;
+      font-size: 1.0625rem;
+    }
+
+    footer {
+      padding-block: 2rem 3rem;
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 32rem) {
+      .app-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
+</Layout>

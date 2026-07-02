@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="72" height="72" role="img" aria-label="PawRecord icon">
+  <rect width="72" height="72" rx="18" fill="#e6912e"/>
+  <g fill="#fff3e0">
+    <ellipse cx="36" cy="44" rx="14" ry="12"/>
+    <ellipse cx="18" cy="30" rx="6" ry="7"/>
+    <ellipse cx="54" cy="30" rx="6" ry="7"/>
+    <ellipse cx="26" cy="18" rx="5" ry="6"/>
+    <ellipse cx="46" cy="18" rx="5" ry="6"/>
+  </g>
+</svg>
