@@ -22,10 +22,6 @@ const { title, description, titleEs, descriptionEs } = Astro.props;
   <head>
     <script is:inline>
       (function () {
-        var theme =
-          localStorage.getItem("theme") ||
-          (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-        document.documentElement.setAttribute("data-theme", theme);
         var lang =
           localStorage.getItem("lang") ||
           (navigator.language.slice(0, 2) === "es" ? "es" : "en");
@@ -54,26 +50,13 @@ const { title, description, titleEs, descriptionEs } = Astro.props;
         <button type="button" data-lang-btn="en">EN</button>
         <button type="button" data-lang-btn="es">ES</button>
       </div>
-      <button type="button" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
     </header>
     <main>
       <slot />
     </main>
     <script>
       const root = document.documentElement;
-      const themeBtn = document.getElementById("theme-toggle")!;
       const langBtns = document.querySelectorAll<HTMLButtonElement>("[data-lang-btn]");
-      const themeColorMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')!;
-
-      function syncTheme() {
-        const isDark = root.getAttribute("data-theme") === "dark";
-        themeBtn.textContent = isDark ? "☀️" : "🌙";
-        themeBtn.setAttribute("aria-pressed", String(isDark));
-        themeColorMeta.setAttribute(
-          "content",
-          getComputedStyle(root).getPropertyValue("--color-bg").trim()
-        );
-      }
 
       function syncLang() {
         const lang = root.getAttribute("lang");
@@ -94,13 +77,6 @@ const { title, description, titleEs, descriptionEs } = Astro.props;
         if (descMeta && desc) descMeta.setAttribute("content", desc);
       }
 
-      themeBtn.addEventListener("click", () => {
-        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", next);
-        localStorage.setItem("theme", next);
-        syncTheme();
-      });
-
       langBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
           const next = btn.dataset.langBtn!;
@@ -110,7 +86,6 @@ const { title, description, titleEs, descriptionEs } = Astro.props;
         });
       });
 
-      syncTheme();
       syncLang();
     </script>
   </body>
@@ -148,16 +123,5 @@ const { title, description, titleEs, descriptionEs } = Astro.props;
   .lang-toggle button.active {
     background: var(--amber);
     color: #241a10;
-  }
-
-  #theme-toggle {
-    border: 1px solid var(--amber-dark);
-    border-radius: 999px;
-    background: var(--color-surface);
-    width: 2.1rem;
-    height: 2.1rem;
-    line-height: 1;
-    font-size: 1rem;
-    cursor: pointer;
   }
 </style>
