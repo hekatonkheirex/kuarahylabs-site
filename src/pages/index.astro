@@ -42,9 +42,9 @@ const email = "kuarahylabs@gmail.com";
   </header>
 
   <section id="apps" class="container">
-    <p class="eyebrow">Apps</p>
-    <h2>PawRecord</h2>
-    <div class="app-card card">
+    <p class="eyebrow reveal">Apps</p>
+    <h2 class="reveal">PawRecord</h2>
+    <div class="app-card card reveal">
       <img
         src="/pawrecord-icon.svg"
         alt="PawRecord app icon"
@@ -92,15 +92,15 @@ const email = "kuarahylabs@gmail.com";
   </section>
 
   <section id="about" class="container">
-    <p class="eyebrow">
+    <p class="eyebrow reveal">
       <span data-lang="en">About</span>
       <span data-lang="es">Acerca de</span>
     </p>
-    <h2>
+    <h2 class="reveal">
       <span data-lang="en">Built by one person, end to end</span>
       <span data-lang="es">Hecho por una sola persona, de principio a fin</span>
     </h2>
-    <p class="about-copy">
+    <p class="about-copy reveal">
       <span data-lang="en"
         >Kuarahy Labs is a solo app studio — one developer designing,
         building, and shipping every app from scratch. The name comes from
@@ -117,15 +117,15 @@ const email = "kuarahylabs@gmail.com";
   </section>
 
   <section id="contact" class="container">
-    <p class="eyebrow">
+    <p class="eyebrow reveal">
       <span data-lang="en">Contact</span>
       <span data-lang="es">Contacto</span>
     </p>
-    <h2>
+    <h2 class="reveal">
       <span data-lang="en">Get in touch</span>
       <span data-lang="es">Hablemos</span>
     </h2>
-    <p>
+    <p class="reveal">
       <a href={`mailto:${email}`}>{email}</a>
     </p>
   </section>
@@ -172,7 +172,7 @@ const email = "kuarahylabs@gmail.com";
       left: 50%;
       width: 140vw;
       aspect-ratio: 1;
-      transform: translate(-50%, -55%);
+      transform: translate(-50%, -55%) rotate(0deg);
       background: conic-gradient(
         from 0deg,
         var(--amber-light) 0deg 8deg,
@@ -181,6 +181,23 @@ const email = "kuarahylabs@gmail.com";
       opacity: 0.35;
       z-index: 0;
       mask-image: radial-gradient(circle, black 0%, transparent 60%);
+      animation: spin 240s linear infinite;
+      transform-origin: center;
+    }
+
+    @keyframes spin {
+      from {
+        transform: translate(-50%, -55%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -55%) rotate(360deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sunburst {
+        animation: none;
+      }
     }
 
     .app-card {
