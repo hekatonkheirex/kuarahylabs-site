@@ -3,8 +3,8 @@
   --color-surface: #f7f7f5;
   --color-text: #121212;
   --color-text-muted: #615d52;
-  --primary: #d97757;
-  --on-primary: #ffffff;
+  --primary: #fda22f;
+  --on-primary: #241a10;
   --primary-container: #e7ddda;
   --on-primary-container: #431c0f;
   --tertiary: #2a77d5;
@@ -79,7 +79,7 @@ h3 {
   letter-spacing: 0.12em;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--on-primary-container);
 }
 
 .brand-mark {
