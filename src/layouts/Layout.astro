@@ -26,6 +26,9 @@ const { title, description, titleEs, descriptionEs } = Astro.props;
           localStorage.getItem("lang") ||
           (navigator.language.slice(0, 2) === "es" ? "es" : "en");
         document.documentElement.setAttribute("lang", lang);
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.documentElement.classList.add("js-reveal-ready");
+        }
       })();
     </script>
     <meta charset="utf-8" />
@@ -88,7 +91,7 @@ const { title, description, titleEs, descriptionEs } = Astro.props;
 
       syncLang();
 
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (root.classList.contains("js-reveal-ready")) {
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
@@ -101,8 +104,6 @@ const { title, description, titleEs, descriptionEs } = Astro.props;
           { threshold: 0.2 },
         );
         document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-      } else {
-        document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
       }
     </script>
   </body>

@@ -80,7 +80,7 @@ section#about {
   background: var(--color-surface);
 }
 
-.reveal {
+.js-reveal-ready .reveal {
   opacity: 0;
   transform: translateY(0.75rem);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -88,11 +88,11 @@ section#about {
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .js-reveal-ready .reveal {
     opacity: 1;
     transform: none;
     transition: none;
