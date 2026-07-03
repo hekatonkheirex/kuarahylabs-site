@@ -42,7 +42,7 @@ const { title, description, titleEs, descriptionEs } = Astro.props;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="/logo.png" />
-    <meta name="theme-color" content="#efeeeb" />
+    <meta name="theme-color" content="#fffaf2" />
   </head>
   <body>
     <header class="site-controls" aria-label="Site preferences">
@@ -104,7 +104,7 @@ const { title, description, titleEs, descriptionEs } = Astro.props;
 
   .lang-toggle {
     display: flex;
-    border: 1px solid var(--outline);
+    border: 1px solid var(--amber-dark);
     border-radius: 999px;
     overflow: hidden;
   }
@@ -121,7 +121,7 @@ const { title, description, titleEs, descriptionEs } = Astro.props;
   }
 
   .lang-toggle button.active {
-    background: var(--primary);
-    color: var(--on-primary);
+    background: var(--amber);
+    color: #241a10;
   }
 </style>

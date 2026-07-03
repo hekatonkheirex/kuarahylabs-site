@@ -1,16 +1,11 @@
 :root {
-  --color-bg: #efeeeb;
-  --color-surface: #f7f7f5;
-  --color-text: #121212;
-  --color-text-muted: #615d52;
-  --primary: #d97757;
-  --on-primary: #ffffff;
-  --primary-container: #e7ddda;
-  --on-primary-container: #431c0f;
-  --tertiary: #2a77d5;
-  --outline: #898781;
-  --outline-variant: #c3c1bb;
-  --amber: #fda22f;
+  --color-bg: #fffaf2;
+  --color-surface: #fff3e0;
+  --color-text: #241a10;
+  --color-text-muted: #6b5a48;
+  --amber: #e6912e;
+  --amber-dark: #a35616;
+  --amber-light: #ffcf86;
   --max-width: 72rem;
   --radius: 0.75rem;
   --font-display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont,
@@ -45,7 +40,7 @@ img {
 }
 
 a {
-  color: var(--tertiary);
+  color: var(--amber-dark);
 }
 
 .container {
@@ -79,7 +74,7 @@ h3 {
   letter-spacing: 0.12em;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--amber-dark);
 }
 
 .brand-mark {
@@ -95,8 +90,8 @@ h3 {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: var(--primary);
-  color: var(--on-primary);
+  background: var(--amber);
+  color: #241a10;
   font-weight: 600;
   border-radius: 999px;
   text-decoration: none;
@@ -104,8 +99,8 @@ h3 {
 }
 
 .button:hover {
-  background: var(--on-primary-container);
-  color: var(--primary-container);
+  background: var(--amber-dark);
+  color: #fff3e0;
   transform: translateY(-1px);
 }
 
@@ -117,8 +112,8 @@ h3 {
 }
 
 .card {
-  background: var(--color-surface);
-  border: 1px solid var(--outline-variant);
+  background: #fff;
+  border: 1px solid #f2e2c8;
   border-radius: var(--radius);
   padding: 1.75rem;
 }
