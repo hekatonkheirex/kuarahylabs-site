@@ -1,0 +1,12 @@
+---
+interface Props { pathname: string; }
+const { pathname } = Astro.props;
+const links = [
+  { href: "/apps", label: "Apps", active: pathname === "/apps" || pathname.startsWith("/apps/") },
+  { href: "/blog", label: "Pet-care guides", active: pathname === "/blog" || pathname.startsWith("/blog/") },
+  { href: "/about", label: "About", active: pathname === "/about" },
+  { href: "/privacy", label: "Privacy", active: pathname === "/privacy" },
+];
+---
+<!-- CSS reflows this semantic list for smaller screens; no JavaScript is required to reveal or operate it. -->
+<nav aria-label="Primary navigation">{links.map((link) => <a class:list={[{ active: link.active }]} href={link.href} aria-current={link.active ? "page" : undefined}>{link.label}</a>)}</nav>

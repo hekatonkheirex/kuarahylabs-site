@@ -1,0 +1,6 @@
+---
+import type { ProductFaq } from "../../data/apps/pawrecord";
+interface Props { items: readonly ProductFaq[]; }
+const { items } = Astro.props;
+---
+<div class="faq-list">{items.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>

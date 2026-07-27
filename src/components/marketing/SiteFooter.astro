@@ -1,0 +1,4 @@
+---
+import { siteConfig } from "../../lib/site";
+---
+<footer class="site-footer"><div class="container footer-grid"><div><a class="brand" href="/"><img src="/logo.png" alt="" width="34" height="34" /><span>Kuarahy Labs</span></a><p>Focused, privacy-first apps for everyday life.</p></div><div><p class="footer-label">Explore</p><a href="/apps/pawrecord">PawRecord</a><a href="/blog">Pet-care guides</a><a href="/privacy">Privacy</a></div><div><p class="footer-label">Contact</p><a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a><a href="/about">About the studio</a></div></div><div class="container footer-bottom">© {new Date().getFullYear()} Kuarahy Labs.</div></footer>

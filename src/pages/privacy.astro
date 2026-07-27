@@ -1,0 +1,9 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumbs from "../components/marketing/Breadcrumbs.astro";
+import PageHero from "../components/marketing/PageHero.astro";
+import { breadcrumbSchema } from "../lib/structured-data";
+---
+<Layout title="Privacy | Kuarahy Labs" description="How Kuarahy Labs approaches privacy on this website." canonicalPath="/privacy" structuredData={[breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Privacy", path: "/privacy" }])] }><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Privacy" }]} /><PageHero eyebrow="Privacy" title="Privacy is part of the product work." description="Kuarahy Labs aims to build focused software with a thoughtful approach to personal information." /><section class="section"><div class="container prose"><h2>Website analytics</h2><p>This website does not load analytics by default. If privacy-conscious analytics is enabled later, it will be configured through the site environment and documented here.</p><h2>Product information</h2><p>Product-specific privacy details must describe the actual app implementation. They are not stated here until they have been verified and published.</p><h2>Questions</h2><p>For support or privacy questions, contact <a href="mailto:kuarahylabs@gmail.com">kuarahylabs@gmail.com</a>.</p></div></section></Layout>
+<!-- TODO Phase 3: replace product privacy placeholder with reviewed, implementation-accurate information. -->
+<style>.prose{max-width:48rem}.prose h2{margin-top:2.2rem}.prose p{color:var(--color-text-muted)}</style>

@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Breadcrumbs from "../../components/marketing/Breadcrumbs.astro";
+import GooglePlayCta from "../../components/marketing/GooglePlayCta.astro";
+import ProductGallery from "../../components/marketing/ProductGallery.astro";
+import FeatureMedia from "../../components/marketing/FeatureMedia.astro";
+import FaqList from "../../components/marketing/FaqList.astro";
+import SectionHeading from "../../components/marketing/SectionHeading.astro";
+import { pawRecord } from "../../data/apps/pawrecord";
+import { breadcrumbSchema, faqSchema, pawRecordSchema } from "../../lib/structured-data";
+
+const breadcrumbs = [{ name: "Home", path: "/" }, { name: "Apps", path: "/apps" }, { name: pawRecord.name, path: "/apps/pawrecord" }];
+const screenshotFor = (feature: typeof pawRecord.screenshots[number]["feature"]) => pawRecord.screenshots.find((screenshot) => screenshot.feature === feature)!;
+---
+<Layout title={pawRecord.metadata.title} description={pawRecord.metadata.description} canonicalPath="/apps/pawrecord" structuredData={[breadcrumbSchema(breadcrumbs), pawRecordSchema(), faqSchema([...pawRecord.faq])]} pageEvent="pawrecord_page_view">
+  <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Apps", href: "/apps" }, { label: pawRecord.name }]} />
+
+  <section class="product-hero"><div class="container product-hero-grid"><div class="product-intro"><div class="product-name"><img src="/pawrecord-icon.svg" alt="PawRecord app icon" width="64" height="64" /><p class="eyebrow">{pawRecord.hero.eyebrow}</p></div><h1>{pawRecord.hero.title}</h1><p class="lede">{pawRecord.hero.description}</p><p class="trust-statement">{pawRecord.hero.trustStatement}</p><GooglePlayCta location="pawrecord_hero" /></div><FeatureMedia {...screenshotFor("overview")} /></div></section>
+
+  <section class="section section-alt"><div class="container"><SectionHeading {...pawRecord.value} /><ul class="value-list">{pawRecord.value.points.map((point) => <li>{point}</li>)}</ul></div></section>
+
+  <section class="section"><div class="container"><SectionHeading eyebrow="Record categories" title="A clear place for important details." /><div class="feature-stack">{pawRecord.features.map((feature, index) => { const screenshot = screenshotFor(feature.id); return <article class:list={["feature-block", { reverse: index % 2 === 1 }]}><div><p class="eyebrow">{feature.eyebrow}</p><h3>{feature.title}</h3><p>{feature.description}</p></div><FeatureMedia {...screenshot} /></article>; })}</div></div></section>
+
+  <section class="section section-alt"><div class="container"><SectionHeading eyebrow="Product gallery" title="PawRecord, ready for verified screenshots." description="Official product screenshots will be added here when they are available." /><ProductGallery screenshots={pawRecord.screenshots.filter((screenshot) => screenshot.feature !== "overview")} /></div></section>
+
+  <section class="section"><div class="container"><SectionHeading eyebrow="How it works" title="A simple record-keeping flow." /><ol class="steps">{pawRecord.howItWorks.map((step, index) => <li><span aria-hidden="true">{index + 1}</span><div><h3>{step.title}</h3><p>{step.description}</p></div></li>)}</ol></div></section>
+
+  <section class="section section-alt"><div class="container faq-wrap"><SectionHeading eyebrow="FAQ" title="PawRecord, at a glance." /><FaqList items={pawRecord.faq} /></div></section>
+
+  <section class="section privacy-note"><div class="container narrow"><SectionHeading eyebrow="Privacy information" title="Read PawRecord’s published privacy policy." description="Details about PawRecord’s data handling and privacy practices are available in the published privacy policy." /><a class="text-link" href={pawRecord.privacyPolicyUrl} target="_blank" rel="noopener noreferrer">Read the PawRecord privacy policy</a></div></section>
+
+  <section class="section section-alt"><div class="container final-cta"><div><p class="eyebrow">Available on Google Play</p><h2>{pawRecord.finalCta.title}</h2><p>{pawRecord.finalCta.description}</p></div><GooglePlayCta location="pawrecord_final_cta" /></div></section>
+</Layout>
+<style>
+  .product-hero{padding:clamp(3rem,8vw,6rem) 0}.product-hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2.5rem,7vw,6rem);align-items:center}.product-name{display:flex;align-items:center;gap:.9rem}.product-name img{border-radius:1.1rem}.product-name .eyebrow{margin:0}.product-intro h1{font-size:clamp(2.45rem,5.5vw,4.7rem);margin-top:1.25rem}.lede{font-size:clamp(1.1rem,2vw,1.3rem);color:var(--color-text-muted);max-width:38rem;margin:1.25rem 0}.trust-statement{font-size:.92rem;font-weight:600;color:var(--color-text-muted);margin:0 0 1.35rem}.value-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);list-style:none;margin:0;padding:0}.value-list li{padding:1.15rem 1.2rem;color:var(--color-text-muted);border-bottom:1px solid var(--color-border)}.value-list li:nth-last-child(-n+2){border-bottom:0}.value-list li:nth-child(odd){border-right:1px solid var(--color-border)}.feature-stack{display:grid;gap:clamp(3rem,8vw,6rem)}.feature-block{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,7vw,6rem);align-items:center}.feature-block.reverse>div{order:2}.feature-block h3{font-size:clamp(1.7rem,3vw,2.5rem);margin:.2rem 0 .8rem}.feature-block p:not(.eyebrow){color:var(--color-text-muted);font-size:1.05rem;max-width:34rem}.product-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:0;margin:0;list-style:none}.steps li{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start}.steps li>span{display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:var(--primary-container);font-family:var(--font-mono);font-size:.8rem;font-weight:600}.steps h3{margin:0}.steps p{margin:.5rem 0 0;color:var(--color-text-muted)}.faq-wrap{max-width:52rem}.faq-list{border-top:1px solid var(--color-border)}.faq-list details{border-bottom:1px solid var(--color-border);padding:1.1rem 0}.faq-list summary{cursor:pointer;font-family:var(--font-display);font-weight:700;font-size:1.15rem}.faq-list p{color:var(--color-text-muted);max-width:42rem;margin:.8rem 0 0}.privacy-note{border-top:1px solid var(--color-border)}.final-cta{display:flex;justify-content:space-between;align-items:end;gap:2rem}.final-cta h2{max-width:38rem}.final-cta p:not(.eyebrow){color:var(--color-text-muted);margin-bottom:0}@media(max-width:44rem){.product-hero-grid,.feature-block,.product-gallery,.steps{grid-template-columns:1fr}.feature-block.reverse>div{order:0}.product-hero-grid .media-placeholder{max-width:22rem}.value-list{grid-template-columns:1fr}.value-list li{border-right:0!important}.value-list li:nth-last-child(2){border-bottom:1px solid var(--color-border)}.final-cta{display:block}.final-cta .button{margin-top:1.4rem}}
+</style>

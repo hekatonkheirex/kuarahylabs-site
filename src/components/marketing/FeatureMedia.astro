@@ -1,0 +1,6 @@
+---
+import MediaPlaceholder from "./MediaPlaceholder.astro";
+interface Props { alt: string; caption: string; src?: string; }
+const { alt, caption, src } = Astro.props;
+---
+{src ? <figure class="feature-image"><img src={src} alt={alt} loading="lazy" width="720" height="1280" /><figcaption>{caption}</figcaption></figure> : <MediaPlaceholder label={caption} alt={alt} />}

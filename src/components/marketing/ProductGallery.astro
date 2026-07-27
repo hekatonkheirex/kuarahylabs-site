@@ -1,0 +1,8 @@
+---
+import MediaPlaceholder from "./MediaPlaceholder.astro";
+import type { ProductScreenshot } from "../../data/apps/pawrecord";
+interface Props { screenshots: readonly ProductScreenshot[]; }
+const { screenshots } = Astro.props;
+---
+<div class="product-gallery" aria-label="PawRecord product gallery">{screenshots.map((screenshot) => screenshot.src ? <figure class="gallery-image"><img src={screenshot.src} alt={screenshot.alt} loading="lazy" width="720" height="1280" /><figcaption>{screenshot.caption}</figcaption></figure> : <MediaPlaceholder label={screenshot.caption} alt={screenshot.alt} />)}</div>
+<!-- TODO(product): Screenshot assets must be verified before adding a src value to the PawRecord content data. -->

@@ -1,0 +1,8 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumbs from "../components/marketing/Breadcrumbs.astro";
+import PageHero from "../components/marketing/PageHero.astro";
+import { breadcrumbSchema } from "../lib/structured-data";
+---
+<Layout title="About Kuarahy Labs" description="Kuarahy Labs is a small studio creating focused, privacy-first apps for everyday life." canonicalPath="/about" structuredData={[breadcrumbSchema([{ name: "Home", path: "/" }, { name: "About", path: "/about" }])] }><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "About" }]} /><PageHero eyebrow="About" title="Small studio. Useful software." description="Kuarahy Labs is a solo studio designing, building, and shipping focused apps with care." /><section class="section"><div class="container prose"><h2>Why Kuarahy?</h2><p>The name comes from “kuarahy,” the Guaraní word for sun. It is a reminder to make software that feels small, warm, and useful rather than loud or overbuilt.</p><h2>How we work</h2><p>The studio focuses on clear problems, simple interfaces, and a privacy-conscious approach. PawRecord is the current app in progress.</p><p><a class="text-link" href="/apps/pawrecord">Explore PawRecord</a></p></div></section></Layout>
+<style>.prose{max-width:48rem}.prose h2{margin-top:2.2rem}.prose p{color:var(--color-text-muted)}</style>

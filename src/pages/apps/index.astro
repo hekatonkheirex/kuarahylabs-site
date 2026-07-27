@@ -1,0 +1,9 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Breadcrumbs from "../../components/marketing/Breadcrumbs.astro";
+import PageHero from "../../components/marketing/PageHero.astro";
+import GooglePlayCta from "../../components/marketing/GooglePlayCta.astro";
+import { breadcrumbSchema } from "../../lib/structured-data";
+---
+<Layout title="Apps by Kuarahy Labs" description="Explore focused, privacy-first apps from Kuarahy Labs." canonicalPath="/apps" structuredData={[breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Apps", path: "/apps" }])] }><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Apps" }]} /><PageHero eyebrow="Apps" title="Software with a clear purpose." description="Kuarahy Labs builds calm, focused tools for everyday life." /><section class="section"><div class="container"><article class="app-listing card"><img src="/pawrecord-icon.svg" alt="PawRecord app icon" width="88" height="88" /><div><p class="eyebrow">Available on Google Play</p><h2>PawRecord</h2><p>Organize pet health records related to veterinary visits, vaccinations, medications, and weight.</p><div class="actions"><a class="text-link" href="/apps/pawrecord">Explore PawRecord</a><GooglePlayCta location="apps-listing" /></div></div></article></div></section></Layout>
+<style>.app-listing{display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start;max-width:52rem}.app-listing img{border-radius:1.35rem}.app-listing h2{margin:.1rem 0}.app-listing p:not(.eyebrow){color:var(--color-text-muted);max-width:38rem}.actions{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-top:1.3rem}@media(max-width:34rem){.app-listing{grid-template-columns:1fr}}</style>

@@ -1,127 +1,53 @@
 ---
 import "../styles/global.css";
+import SiteHeader from "../components/marketing/SiteHeader.astro";
+import SiteFooter from "../components/marketing/SiteFooter.astro";
+import JsonLdScript from "../components/seo/JsonLd.astro";
+import { absoluteUrl, siteConfig } from "../lib/site";
+import { organizationSchema, websiteSchema, type JsonLd } from "../lib/structured-data";
 
-interface Props {
-  title: string;
-  description: string;
-  titleEs: string;
-  descriptionEs: string;
-}
-
-const { title, description, titleEs, descriptionEs } = Astro.props;
+interface Props { title?: string; description?: string; canonicalPath?: string; socialImage?: string; type?: "website" | "article"; noindex?: boolean; structuredData?: JsonLd[]; showLanguageToggle?: boolean; pageEvent?: string; }
+const { title = siteConfig.defaultTitle, description = siteConfig.defaultDescription, canonicalPath = "/", socialImage = siteConfig.defaultSocialImage, type = "website", noindex = false, structuredData = [], showLanguageToggle = false, pageEvent } = Astro.props;
+const canonical = absoluteUrl(canonicalPath);
+const schemas = canonicalPath === "/" ? [organizationSchema(), websiteSchema(), ...structuredData] : [organizationSchema(), ...structuredData];
+const provider = import.meta.env.PUBLIC_ANALYTICS_PROVIDER || "";
 ---
-
 <!doctype html>
-<html
-  lang="en"
-  data-en-title={title}
-  data-es-title={titleEs}
-  data-en-description={description}
-  data-es-description={descriptionEs}
->
+<html lang="en">
   <head>
-    <script is:inline>
-      (function () {
-        var lang =
-          localStorage.getItem("lang") ||
-          (navigator.language.slice(0, 2) === "es" ? "es" : "en");
-        document.documentElement.setAttribute("lang", lang);
-      })();
-    </script>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content="/logo.png" />
-    <meta name="theme-color" content="#fffaf2" />
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="/logo.png" /><link rel="canonical" href={canonical} />
+    <title>{title}</title><meta name="description" content={description} />
+    {import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION && <meta name="google-site-verification" content={import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION} />}{noindex && <meta name="robots" content="noindex, follow" />}
+    <meta property="og:type" content={type} /><meta property="og:site_name" content={siteConfig.name} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonical} /><meta property="og:image" content={absoluteUrl(socialImage)} />
+    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={absoluteUrl(socialImage)} /><meta name="theme-color" content="#FFFAF2" />
+    {schemas.map((schema) => <JsonLdScript data={schema} />)}
   </head>
-  <body>
-    <header class="site-controls" aria-label="Site preferences">
-      <div class="lang-toggle" role="group" aria-label="Language">
-        <button type="button" data-lang-btn="en">EN</button>
-        <button type="button" data-lang-btn="es">ES</button>
-      </div>
-    </header>
-    <main>
-      <slot />
-    </main>
+  <body data-analytics-provider={provider} data-page-event={pageEvent}>
+    <a class="skip-link" href="#content">Skip to content</a><SiteHeader showLanguageToggle={showLanguageToggle} />
+    <main id="content"><slot /></main><SiteFooter />
     <script>
-      const root = document.documentElement;
-      const langBtns = document.querySelectorAll<HTMLButtonElement>("[data-lang-btn]");
-
-      function syncLang() {
-        const lang = root.getAttribute("lang");
-        langBtns.forEach((btn) => {
-          const active = btn.dataset.langBtn === lang;
-          btn.classList.toggle("active", active);
-          btn.setAttribute("aria-pressed", String(active));
-        });
-        document.querySelectorAll<HTMLElement>("[data-en-label]").forEach((el) => {
-          const label = lang === "es" ? el.dataset.esLabel : el.dataset.enLabel;
-          if (!label) return;
-          if (el.tagName === "IMG") el.setAttribute("alt", label);
-          else el.setAttribute("aria-label", label);
-        });
-        document.title = (lang === "es" ? root.dataset.esTitle : root.dataset.enTitle) ?? document.title;
-        const descMeta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-        const desc = lang === "es" ? root.dataset.esDescription : root.dataset.enDescription;
-        if (descMeta && desc) descMeta.setAttribute("content", desc);
+      const body = document.body;
+      const provider = body.dataset.analyticsProvider;
+      const integrations = window as Window & { umami?: { track: (event: string, properties: Record<string, string>) => void }; va?: (event: string, properties: { name: string; data: Record<string, string> }) => void };
+      function track(event: string, properties: Record<string, string> = {}) {
+        if (provider === "umami" && typeof integrations.umami?.track === "function") integrations.umami.track(event, properties);
+        if (provider === "vercel" && typeof integrations.va === "function") integrations.va("event", { name: event, data: properties });
       }
-
-      langBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const next = btn.dataset.langBtn!;
-          root.setAttribute("lang", next);
-          localStorage.setItem("lang", next);
-          syncLang();
-        });
-      });
-
-      syncLang();
+      if (provider) {
+        const pageEvent = body.dataset.pageEvent;
+        if (pageEvent) track(pageEvent);
+        document.querySelectorAll<HTMLElement>("[data-track-event]").forEach((element) => element.addEventListener("click", () => { const properties: Record<string, string> = { location: element.dataset.trackLocation || "unknown" }; if (element.dataset.trackSlug) properties.slug = element.dataset.trackSlug; track(element.dataset.trackEvent || "interaction", properties); }));
+      }
+      const root = document.documentElement;
+      const buttons = document.querySelectorAll<HTMLButtonElement>("[data-lang-btn]");
+      if (buttons.length) {
+        const sync = () => { const lang = root.lang; buttons.forEach((button) => { const active = button.dataset.langBtn === lang; button.classList.toggle("active", active); button.setAttribute("aria-pressed", String(active)); }); };
+        const lang = localStorage.getItem("homepage-lang"); if (lang === "es" || lang === "en") root.lang = lang;
+        buttons.forEach((button) => button.addEventListener("click", () => { root.lang = button.dataset.langBtn || "en"; localStorage.setItem("homepage-lang", root.lang); sync(); })); sync();
+      }
     </script>
   </body>
 </html>
-
-<style>
-  .site-controls {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .lang-toggle {
-    display: flex;
-    border: 1px solid var(--amber-dark);
-    border-radius: 999px;
-    overflow: hidden;
-  }
-
-  .lang-toggle button {
-    border: none;
-    background: var(--color-surface);
-    color: var(--color-text-muted);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.35rem 0.75rem;
-    cursor: pointer;
-  }
-
-  .lang-toggle button.active {
-    background: var(--amber);
-    color: #241a10;
-  }
-</style>

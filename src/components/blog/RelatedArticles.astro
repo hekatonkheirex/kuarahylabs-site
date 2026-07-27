@@ -1,0 +1,7 @@
+---
+import type { BlogPost } from "../../lib/blog";
+import ArticleCard from "./ArticleCard.astro";
+interface Props { posts: BlogPost[]; }
+const { posts } = Astro.props;
+---
+{posts.length > 0 && <section class="related"><h2>Related guides</h2><div class="article-grid">{posts.map((post) => <ArticleCard post={post} />)}</div></section>}

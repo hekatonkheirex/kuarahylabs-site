@@ -1,0 +1,13 @@
+---
+import MobileNavigation from "./MobileNavigation.astro";
+interface Props { showLanguageToggle?: boolean; }
+const { showLanguageToggle = false } = Astro.props;
+const pathname = Astro.url.pathname;
+---
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/" aria-label="Kuarahy Labs home"><img src="/logo.png" alt="" width="38" height="38" /><span>Kuarahy Labs</span></a>
+    <MobileNavigation pathname={pathname} />
+    {showLanguageToggle && <div class="lang-toggle" role="group" aria-label="Homepage language"><button type="button" data-lang-btn="en">EN</button><button type="button" data-lang-btn="es">ES</button></div>}
+  </div>
+</header>

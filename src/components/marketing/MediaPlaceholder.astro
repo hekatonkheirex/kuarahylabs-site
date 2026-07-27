@@ -1,0 +1,5 @@
+---
+interface Props { label?: string; description?: string; alt?: string; }
+const { label = "Official PawRecord screenshot", description = "An official product image will be added here.", alt = "Placeholder for an official PawRecord screenshot" } = Astro.props;
+---
+<figure class="media-placeholder"><div class="placeholder-frame" role="img" aria-label={alt}><img src="/pawrecord-icon.svg" alt="" width="54" height="54" /><span>Official screenshot placeholder</span></div><figcaption><strong>{label}</strong><span>{description}</span></figcaption></figure>

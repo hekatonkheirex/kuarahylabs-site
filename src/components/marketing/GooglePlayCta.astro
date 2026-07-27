@@ -1,0 +1,6 @@
+---
+import { siteConfig } from "../../lib/site";
+interface Props { label?: string; location: string; variant?: "primary" | "secondary"; }
+const { label = "Get it on Google Play", location, variant = "primary" } = Astro.props;
+---
+<a class:list={["button", { secondary: variant === "secondary" }]} href={siteConfig.pawRecordGooglePlayUrl} target="_blank" rel="noopener noreferrer" data-track-event="google_play_click" data-track-location={location}>{label}<span aria-hidden="true">↗</span></a>
