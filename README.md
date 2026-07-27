@@ -61,6 +61,6 @@ Only add FAQ entries and structured-data properties when their answers are publi
 
 ## Blog content
 
-Blog posts are Markdown files in `src/content/blog/`, validated by the strict schema in `src/content.config.ts`. Filename determines the slug. Set `draft: true` to exclude an article from routes, the listing, related content, and the sitemap. Published posts are sorted newest first; reading time uses 210 words per minute; explicit `relatedSlugs` are used before shared categories or tags.
+Blog posts are Markdown files in `src/content/blog/`, validated by the strict schema in `src/content.config.ts`. Filename determines the slug. Set `draft: true` to exclude an article from routes, the listing, related content, and the sitemap. Published posts are sorted newest first; the local reading-time helper uses 210 words per minute and can be re-enabled once articles have been expanded to their intended editorial depth; explicit `relatedSlugs` are used before shared categories or tags.
 
 Use actual `updatedDate` values only after substantive revisions. Keep medical content organizational and non-prescriptive, include the reusable disclaimer, and use descriptive internal links where they help the reader. Article views use `blog_article_view`; article-to-PawRecord CTAs use `article_to_pawrecord_click` with a slug, while analytics remains disabled until a provider is configured. The sitemap includes published posts. RSS is intentionally not included to avoid an additional dependency at this stage.
