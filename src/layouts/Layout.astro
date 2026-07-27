@@ -6,8 +6,8 @@ import JsonLdScript from "../components/seo/JsonLd.astro";
 import { absoluteUrl, siteConfig } from "../lib/site";
 import { organizationSchema, websiteSchema, type JsonLd } from "../lib/structured-data";
 
-interface Props { title?: string; description?: string; canonicalPath?: string; socialImage?: string; type?: "website" | "article"; noindex?: boolean; structuredData?: JsonLd[]; showLanguageToggle?: boolean; pageEvent?: string; }
-const { title = siteConfig.defaultTitle, description = siteConfig.defaultDescription, canonicalPath = "/", socialImage = siteConfig.defaultSocialImage, type = "website", noindex = false, structuredData = [], showLanguageToggle = false, pageEvent } = Astro.props;
+interface Props { title?: string; description?: string; canonicalPath?: string; socialImage?: string; type?: "website" | "article"; noindex?: boolean; structuredData?: JsonLd[]; pageEvent?: string; }
+const { title = siteConfig.defaultTitle, description = siteConfig.defaultDescription, canonicalPath = "/", socialImage = siteConfig.defaultSocialImage, type = "website", noindex = false, structuredData = [], pageEvent } = Astro.props;
 const canonical = absoluteUrl(canonicalPath);
 const schemas = canonicalPath === "/" ? [organizationSchema(), websiteSchema(), ...structuredData] : [organizationSchema(), ...structuredData];
 const provider = import.meta.env.PUBLIC_ANALYTICS_PROVIDER || "";
@@ -26,7 +26,7 @@ const provider = import.meta.env.PUBLIC_ANALYTICS_PROVIDER || "";
     {schemas.map((schema) => <JsonLdScript data={schema} />)}
   </head>
   <body data-analytics-provider={provider} data-page-event={pageEvent}>
-    <a class="skip-link" href="#content">Skip to content</a><SiteHeader showLanguageToggle={showLanguageToggle} />
+    <a class="skip-link" href="#content">Skip to content</a><SiteHeader />
     <main id="content"><slot /></main><SiteFooter />
     <script>
       const body = document.body;
@@ -40,13 +40,6 @@ const provider = import.meta.env.PUBLIC_ANALYTICS_PROVIDER || "";
         const pageEvent = body.dataset.pageEvent;
         if (pageEvent) track(pageEvent);
         document.querySelectorAll<HTMLElement>("[data-track-event]").forEach((element) => element.addEventListener("click", () => { const properties: Record<string, string> = { location: element.dataset.trackLocation || "unknown" }; if (element.dataset.trackSlug) properties.slug = element.dataset.trackSlug; track(element.dataset.trackEvent || "interaction", properties); }));
-      }
-      const root = document.documentElement;
-      const buttons = document.querySelectorAll<HTMLButtonElement>("[data-lang-btn]");
-      if (buttons.length) {
-        const sync = () => { const lang = root.lang; buttons.forEach((button) => { const active = button.dataset.langBtn === lang; button.classList.toggle("active", active); button.setAttribute("aria-pressed", String(active)); }); };
-        const lang = localStorage.getItem("homepage-lang"); if (lang === "es" || lang === "en") root.lang = lang;
-        buttons.forEach((button) => button.addEventListener("click", () => { root.lang = button.dataset.langBtn || "en"; localStorage.setItem("homepage-lang", root.lang); sync(); })); sync();
       }
     </script>
   </body>

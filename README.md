@@ -49,7 +49,7 @@ Vercel can deploy this as a static Astro project with `npm run build`; output is
 
 ## Localization TODO
 
-The homepage preserves its existing EN/ES switch only because complete Spanish homepage copy exists. New routes are canonical English pages and deliberately show no global language switch. When Spanish content is ready, add explicit localized routes such as `/es/`, `/es/apps/pawrecord`, and `/es/blog/[slug]`; give each localized page its own metadata, canonical/hreflang strategy, and translated source content. Do not use client-side or machine-translated content for SEO.
+The site is currently English-only. When Spanish content is ready, add explicit localized routes such as `/es/`, `/es/apps/pawrecord`, and `/es/blog/[slug]`; give each localized page its own metadata, canonical/hreflang strategy, and translated source content. Do not use client-side or machine-translated content for SEO.
 
 ## PawRecord product content
 

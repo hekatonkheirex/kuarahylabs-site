@@ -21,7 +21,7 @@ const screenshotFor = (feature: typeof pawRecord.screenshots[number]["feature"])
 
   <section class="section"><div class="container"><SectionHeading eyebrow="Record categories" title="A clear place for important details." /><div class="feature-stack">{pawRecord.features.map((feature, index) => { const screenshot = screenshotFor(feature.id); return <article class:list={["feature-block", { reverse: index % 2 === 1 }]}><div><p class="eyebrow">{feature.eyebrow}</p><h3>{feature.title}</h3><p>{feature.description}</p></div><FeatureMedia {...screenshot} /></article>; })}</div></div></section>
 
-  <section class="section section-alt"><div class="container"><SectionHeading eyebrow="Product gallery" title="PawRecord, ready for verified screenshots." description="Official product screenshots will be added here when they are available." /><ProductGallery screenshots={pawRecord.screenshots.filter((screenshot) => screenshot.feature !== "overview")} /></div></section>
+  <section class="section section-alt"><div class="container"><SectionHeading eyebrow="Product gallery" title="See PawRecord in use." description="Explore the app's record-keeping screens and preferences." /><ProductGallery screenshots={pawRecord.screenshots.filter((screenshot) => screenshot.feature !== "overview")} /></div></section>
 
   <section class="section"><div class="container"><SectionHeading eyebrow="How it works" title="A simple record-keeping flow." /><ol class="steps">{pawRecord.howItWorks.map((step, index) => <li><span aria-hidden="true">{index + 1}</span><div><h3>{step.title}</h3><p>{step.description}</p></div></li>)}</ol></div></section>
 

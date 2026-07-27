@@ -1,12 +1,13 @@
 import { siteConfig } from "../../lib/site";
 
 export type PawRecordFeature = "visits" | "vaccinations" | "medications" | "weight";
+export type PawRecordScreenshot = "overview" | PawRecordFeature | "notes" | "reminders" | "settings" | "subscription";
 
 export type ProductScreenshot = {
   src?: string;
   alt: string;
   caption: string;
-  feature: "overview" | PawRecordFeature;
+  feature: PawRecordScreenshot;
 };
 
 export type ProductFaq = { question: string; answer: string };
@@ -38,11 +39,15 @@ export const pawRecord = {
     { id: "weight", eyebrow: "Weight", title: "Record weight information over time.", description: "Keep weight entries as part of your pet’s organized health history." },
   ] satisfies { id: PawRecordFeature; eyebrow: string; title: string; description: string }[],
   screenshots: [
-    { feature: "overview", src: "/pawrecord/overview.webp", alt: "PawRecord overview screen showing a pet profile and health record categories", caption: "PawRecord overview" },
-    { feature: "visits", src: "/pawrecord/veterinary-visits.webp", alt: "PawRecord veterinary visits screen showing a list of visit records", caption: "Veterinary visits" },
-    { feature: "vaccinations", alt: "Placeholder for an official PawRecord vaccinations screenshot", caption: "Vaccinations" },
-    { feature: "medications", src: "/pawrecord/medications.webp", alt: "PawRecord medications screen showing medication records", caption: "Medications" },
-    { feature: "weight", src: "/pawrecord/weight.webp", alt: "PawRecord weight screen showing weight records", caption: "Weight" },
+    { feature: "overview", src: "/pawrecord/homescreen.jpeg", alt: "PawRecord home screen showing Buddy's pet profile", caption: "Pet home screen" },
+    { feature: "visits", src: "/pawrecord/veterinary-visits.jpeg", alt: "PawRecord veterinary visits screen showing visit records", caption: "Veterinary visits" },
+    { feature: "vaccinations", src: "/pawrecord/vaccinations.jpeg", alt: "PawRecord vaccinations screen showing vaccination records", caption: "Vaccinations" },
+    { feature: "medications", src: "/pawrecord/medicines.jpeg", alt: "PawRecord medications screen showing medication records", caption: "Medications" },
+    { feature: "weight", src: "/pawrecord/weight.jpeg", alt: "PawRecord weight screen showing a weight trend and entries", caption: "Weight records" },
+    { feature: "notes", src: "/pawrecord/notes.jpeg", alt: "PawRecord notes screen showing dated pet health notes", caption: "Health notes" },
+    { feature: "reminders", src: "/pawrecord/reminders.jpeg", alt: "PawRecord reminders screen showing medication reminders", caption: "Reminders" },
+    { feature: "settings", src: "/pawrecord/settings.jpeg", alt: "PawRecord settings screen showing app preferences", caption: "Settings" },
+    { feature: "subscription", src: "/pawrecord/subscription.jpeg", alt: "PawRecord Pro upgrade screen showing subscription options", caption: "PawRecord Pro" },
   ] satisfies ProductScreenshot[],
   howItWorks: [
     { title: "Install PawRecord", description: "Download PawRecord for Android from Google Play." },
@@ -58,5 +63,4 @@ export const pawRecord = {
   googlePlayUrl: siteConfig.pawRecordGooglePlayUrl,
 } as const;
 
-// TODO(product): Replace placeholders with verified PawRecord screenshots and concise, accurate alt text.
 // TODO(product): Confirm subscription, pricing, data-storage, and account behavior before publishing related copy or FAQ entries.
