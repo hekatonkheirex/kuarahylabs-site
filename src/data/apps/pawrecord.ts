@@ -38,11 +38,11 @@ export const pawRecord = {
     { id: "weight", eyebrow: "Weight", title: "Record weight information over time.", description: "Keep weight entries as part of your pet’s organized health history." },
   ] satisfies { id: PawRecordFeature; eyebrow: string; title: string; description: string }[],
   screenshots: [
-    { feature: "overview", alt: "Placeholder for an official PawRecord overview screenshot", caption: "PawRecord overview" },
-    { feature: "visits", alt: "Placeholder for an official PawRecord veterinary visits screenshot", caption: "Veterinary visits" },
+    { feature: "overview", src: "/pawrecord/overview.webp", alt: "PawRecord overview screen showing a pet profile and health record categories", caption: "PawRecord overview" },
+    { feature: "visits", src: "/pawrecord/veterinary-visits.webp", alt: "PawRecord veterinary visits screen showing a list of visit records", caption: "Veterinary visits" },
     { feature: "vaccinations", alt: "Placeholder for an official PawRecord vaccinations screenshot", caption: "Vaccinations" },
-    { feature: "medications", alt: "Placeholder for an official PawRecord medications screenshot", caption: "Medications" },
-    { feature: "weight", alt: "Placeholder for an official PawRecord weight screenshot", caption: "Weight" },
+    { feature: "medications", src: "/pawrecord/medications.webp", alt: "PawRecord medications screen showing medication records", caption: "Medications" },
+    { feature: "weight", src: "/pawrecord/weight.webp", alt: "PawRecord weight screen showing weight records", caption: "Weight" },
   ] satisfies ProductScreenshot[],
   howItWorks: [
     { title: "Install PawRecord", description: "Download PawRecord for Android from Google Play." },
