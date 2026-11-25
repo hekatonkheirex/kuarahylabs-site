@@ -1,4 +1,5 @@
 ---
+import Analytics from "@vercel/analytics/astro";
 import "../styles/global.css";
 import SiteHeader from "../components/marketing/SiteHeader.astro";
 import SiteFooter from "../components/marketing/SiteFooter.astro";
@@ -24,17 +25,20 @@ const provider = import.meta.env.PUBLIC_ANALYTICS_PROVIDER || "";
     <meta property="og:type" content={type} /><meta property="og:site_name" content={siteConfig.name} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonical} /><meta property="og:image" content={absoluteUrl(socialImage)} />
     <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={absoluteUrl(socialImage)} /><meta name="theme-color" content="#FFFAF2" />
     {schemas.map((schema) => <JsonLdScript data={schema} />)}
+    {provider === "vercel" && <Analytics />}
   </head>
   <body data-analytics-provider={provider} data-page-event={pageEvent}>
     <a class="skip-link" href="#content">Skip to content</a><SiteHeader />
     <main id="content"><slot /></main><SiteFooter />
     <script>
+      import { track as trackVercel } from "@vercel/analytics";
+
       const body = document.body;
       const provider = body.dataset.analyticsProvider;
-      const integrations = window as Window & { umami?: { track: (event: string, properties: Record<string, string>) => void }; va?: (event: string, properties: { name: string; data: Record<string, string> }) => void };
+      const integrations = window as Window & { umami?: { track: (event: string, properties: Record<string, string>) => void } };
       function track(event: string, properties: Record<string, string> = {}) {
         if (provider === "umami" && typeof integrations.umami?.track === "function") integrations.umami.track(event, properties);
-        if (provider === "vercel" && typeof integrations.va === "function") integrations.va("event", { name: event, data: properties });
+        if (provider === "vercel") void customElements.whenDefined("vercel-analytics").then(() => trackVercel(event, properties));
       }
       if (provider) {
         const pageEvent = body.dataset.pageEvent;

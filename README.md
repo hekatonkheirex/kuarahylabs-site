@@ -27,8 +27,8 @@ Copy `.env.example` to `.env` for local configuration. All listed variables are 
 
 - `PUBLIC_SITE_URL`: canonical site URL. It defaults to `https://kuarahylabs.vercel.app`; set it in Vercel when a custom domain is connected.
 - `PUBLIC_GOOGLE_SITE_VERIFICATION`: optional Google Search Console verification token.
-- `PUBLIC_ANALYTICS_PROVIDER`: leave empty to disable analytics. `umami` and `vercel` are reserved adapters.
-- `PUBLIC_ANALYTICS_SITE_ID` and `PUBLIC_ANALYTICS_HOST`: reserved for a future provider integration; no provider script is loaded yet.
+- `PUBLIC_ANALYTICS_PROVIDER`: set to `vercel` to enable Vercel Web Analytics. Leave empty to disable analytics. `umami` is reserved.
+- `PUBLIC_ANALYTICS_SITE_ID` and `PUBLIC_ANALYTICS_HOST`: reserved for a future provider integration.
 - `PUBLIC_CONTACT_EMAIL`: support contact email.
 
 ## SEO and Search Console
@@ -46,6 +46,8 @@ Add verified app data to the central site/content modules, create an Astro route
 ## Deployment
 
 Vercel can deploy this as a static Astro project with `npm run build`; output is `dist/`. Configure the public environment variables in Vercel before deployment.
+
+To collect pageviews, enable Web Analytics in the Vercel project, set `PUBLIC_ANALYTICS_PROVIDER=vercel` for Production, and deploy. Visit the production site and check the Analytics dashboard. Existing CTA and article events require a Vercel plan that supports [custom events](https://vercel.com/docs/analytics/custom-events).
 
 ## Localization TODO
 
