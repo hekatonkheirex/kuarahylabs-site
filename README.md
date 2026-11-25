@@ -4,13 +4,15 @@ Static product-marketing site for Kuarahy Labs, built with Astro and TypeScript.
 
 ## Architecture
 
-- Astro 5 static output and file-based routes
+- Astro 7 static output and file-based routes
 - Native Astro components in `src/components/marketing` and `src/components/seo`
 - Shared metadata and JSON-LD helpers in `src/lib`
 - Global Kuarahy visual tokens in `src/styles/global.css`
 - Static public files in `public/`
 
 ## Local development
+
+Use Node.js 22.23.4 or newer. Vercel uses Node.js 24.
 
 ```bash
 npm install
